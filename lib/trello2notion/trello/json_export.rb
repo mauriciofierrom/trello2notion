@@ -76,16 +76,12 @@ module Trello2Notion
       end
 
       def self.parse_cards(board_json, members = [])
-        cards = []
-
-        board_json["cards"].each do |card_json|
+        board_json["cards"].map do |card_json|
           card = parse_card(card_json)
           comments = parse_comments(card, members, board_json[KEYS[:actions]])
           card.comments = comments
-          cards << card
+          card
         end
-
-        cards
       end
     end
   end
