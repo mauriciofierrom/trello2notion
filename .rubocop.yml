@@ -1,5 +1,7 @@
 AllCops:
-  TargetRubyVersion: 2.6
+  Exclude:
+    - 'test/**/*.rb'
+  TargetRubyVersion: 3.2.2
   NewCops: enable
 
 Style/StringLiterals:
@@ -9,6 +11,9 @@ Style/StringLiterals:
 Style/StringLiteralsInInterpolation:
   Enabled: true
   EnforcedStyle: double_quotes
+
+Style/MultilineBlockChain:
+  Enabled: false
 
 Layout/LineLength:
   Max: 120
