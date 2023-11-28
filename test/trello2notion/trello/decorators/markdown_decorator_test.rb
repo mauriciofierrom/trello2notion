@@ -2,7 +2,7 @@
 
 require "test_helper"
 require "redcarpet"
-require "trello2notion/trello/decorators/json_export_decorator"
+require "trello2notion/trello/decorators/markdown_decorator"
 require "trello2notion/trello/trello"
 
 class MarkdownDecoratorTest < Minitest::Test
