@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require "test_helper"
-require "redcarpet"
-require "trello2notion/trello/decorators/markdown_decorator"
-require "trello2notion/trello/trello"
+require "kramdown"
+require "trello2notion/trello"
+require "trello2notion/trello/decorators"
 
 class MarkdownDecoratorTest < Minitest::Test
   include Trello2Notion::Trello
@@ -28,10 +28,11 @@ class MarkdownDecoratorTest < Minitest::Test
   end
 
   def test_markdown_valid
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true)
     markdown_decorator = MarkdownDecorator.new(board)
 
-    markdown.render(markdown_decorator.generate)
+    # WARN: As long as this doesn't generate an exception we have generated
+    # valid Markdown. Should be improved
+    Kramdown::Parser::Markdown.parse(markdown_decorator.generate)
   end
 
   private

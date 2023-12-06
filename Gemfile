@@ -10,8 +10,8 @@ gem "minitest", "~> 5.0"
 
 gem "rubocop", "~> 1.21"
 
-gem "redcarpet", "~> 3.6"
-
 gem "simplecov", "~> 0.22.0", require: false, group: :test
 
 gem "simplecov-cobertura", "~> 2.1", require: false, group: :test
+
+gem "kramdown", "~> 2.4"
