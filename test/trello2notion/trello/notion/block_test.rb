@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
-require "trello2notion/trello/notion"
+require "test_helper"
+
+require_relative "block_interface_test"
+require_relative "block_subclass_test"
+
 include Trello2Notion::Notion
 
 class StubbedBlock < Block
