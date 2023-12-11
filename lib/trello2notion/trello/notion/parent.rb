@@ -4,29 +4,25 @@ module Trello2Notion
   module Notion
     # Abstract class for Notion parent resources
     class Parent
+      include JsonConvertible
+
       attr_accessor :type
 
       def initialize(**rest)
         post_init(**rest) if rest
       end
 
-      def to_h
-        local_to_h(
-          {
-            type: @type
-          }
-        )
+      def local_to_h
+        {
+          type: @type
+        }.merge parent_to_h
       end
 
       def post_init(**_args)
         nil
       end
 
-      def to_json(*)
-        to_h.to_json(*)
-      end
-
-      def local_to_h(_hash)
+      def parent_to_h
         raise NotImplementedError, "Class #{self.class} must implement local_to_h"
       end
     end
@@ -37,12 +33,10 @@ module Trello2Notion
         @type = :workspace
       end
 
-      def local_to_h(hash)
-        hash.merge(
-          {
-            workspace: true
-          }
-        )
+      def parent_to_h
+        {
+          workspace: true
+        }
       end
     end
 
@@ -55,12 +49,10 @@ module Trello2Notion
         @page_id = page_id
       end
 
-      def local_to_h(hash)
-        hash.merge(
-          {
-            page_id: @page_id
-          }
-        )
+      def parent_to_h
+        {
+          page_id: @page_id
+        }
       end
     end
   end

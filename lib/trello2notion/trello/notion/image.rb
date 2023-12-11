@@ -26,12 +26,10 @@ module Trello2Notion
         @file = validate_url(file)
       end
 
-      def local_to_h(hash)
-        hash.merge(
-          {
-            image: @file
-          }
-        )
+      def block_to_h
+        {
+          image: @file
+        }
       end
 
       private

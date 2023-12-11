@@ -12,14 +12,12 @@ module Trello2Notion
         @rich_text = rich_text || []
       end
 
-      def local_to_h(hash)
-        hash.merge(
-          {
-            paragraph: {
-              rich_text: rich_text.map(&:to_h)
-            }
+      def block_to_h
+        {
+          paragraph: {
+            rich_text: rich_text.map(&:to_h)
           }
-        )
+        }
       end
     end
   end

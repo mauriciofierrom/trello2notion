@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
+require "test_helper"
+
+require_relative "json_convertible_interface_test"
+
 class RichTextTest < Minitest::Test
   include Trello2Notion::Notion
+  include JsonConvertibleInterfaceTest
 
   def setup
     text = "Some text"
     rich_text_content = RichTextContent.new(text, nil)
-    @rich_text = RichText.new(rich_text_content, nil, text)
+    @rich_text = @object = RichText.new(rich_text_content, nil, text)
   end
 
   def test_to_h

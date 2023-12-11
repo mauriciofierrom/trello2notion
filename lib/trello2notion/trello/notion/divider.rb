@@ -4,12 +4,10 @@ module Trello2Notion
   module Notion
     # A Notion divider block
     class Divider < Block
-      def local_to_h(hash)
-        hash.merge(
-          {
-            divider: {}
-          }
-        )
+      def block_to_h
+        {
+          divider: {}
+        }
       end
     end
   end

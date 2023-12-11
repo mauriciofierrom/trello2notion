@@ -8,9 +8,8 @@ require_relative "block_subclass_test"
 include Trello2Notion::Notion
 
 class StubbedBlock < Block
-  def local_to_h(hash) = hash
+  def block_to_h = {}
 end
-
 
 class BlockTest < Minitest::Test
   include BlockInterfaceTest
@@ -20,8 +19,8 @@ class BlockTest < Minitest::Test
     @stubbed_block = StubbedBlock.new
   end
 
-  def test_forces_subclass_to_implement_local_to_h
-    assert_raises(NotImplementedError) { @block.local_to_h({}) }
+  def test_forces_subclass_to_implement_block_to_h
+    assert_raises(NotImplementedError) { @block.block_to_h }
   end
 
   def test_to_json

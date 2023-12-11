@@ -2,10 +2,14 @@
 
 require "json"
 
+require_relative "json_convertible"
+
 module Trello2Notion
   module Notion
     # Base class for notion blocks
     class Block
+      include JsonConvertible
+
       attr_accessor :object, :type
 
       def initialize(object: :object, **rest)
@@ -15,25 +19,19 @@ module Trello2Notion
         post_init(**rest) if rest
       end
 
-      def to_json(*)
-        to_h.to_json(*)
+      def local_to_h
+        {
+          object: @object,
+          type: @type
+        }.merge block_to_h
       end
 
-      def to_h
-        local_to_h(
-          {
-            object: @object,
-            type: @type
-          }
-        )
+      def block_to_h
+        raise NotImplementedError, "Class #{self.class} must implement block_to_h"
       end
 
       def post_init(**_args)
         nil
-      end
-
-      def local_to_h(hash)
-        raise NotImplementedError, "Class #{self.class} must implement local_to_h"
       end
 
       private

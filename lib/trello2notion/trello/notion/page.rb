@@ -10,6 +10,8 @@ module Trello2Notion
 
     # A class for a Notion page
     class Page
+      include JsonConvertible
+
       attr_accessor :cover, :icon, :properties, :parent
 
       def initialize(cover = {}, icon = {}, title:, parent:, children: [])
@@ -21,7 +23,7 @@ module Trello2Notion
         @children = children
       end
 
-      def to_h
+      def local_to_h
         {
           cover: @cover,
           icon: @icon,
@@ -29,10 +31,6 @@ module Trello2Notion
           parent: @parent,
           children: @children
         }
-      end
-
-      def to_json(*)
-        to_h.to_json(*)
       end
     end
   end

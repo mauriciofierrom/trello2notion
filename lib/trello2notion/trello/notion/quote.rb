@@ -12,16 +12,14 @@ module Trello2Notion
         @children = children
       end
 
-      def local_to_h(hash)
-        hash.merge(
-          {
-            quote: {
-              rich_text: @rich_text,
-              color: @color,
-              children: @children
-            }
+      def block_to_h
+        {
+          quote: {
+            rich_text: @rich_text,
+            color: @color,
+            children: @children
           }
-        )
+        }
       end
     end
   end

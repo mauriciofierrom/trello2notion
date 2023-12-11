@@ -1,9 +1,7 @@
-module BlockInterfaceTest
-  def test_responds_to_to_h
-    assert_respond_to(@object, :to_h)
-  end
+# frozen_string_literal: true
 
-  def test_responds_to_to_json
-    assert_respond_to(@object, :to_json)
-  end
+require_relative "json_convertible_test"
+
+module BlockInterfaceTest
+  include JsonConvertibleInterfaceTest
 end
