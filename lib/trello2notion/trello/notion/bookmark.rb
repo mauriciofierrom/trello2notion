@@ -13,15 +13,13 @@ module Trello2Notion
         @url = url
       end
 
-      def local_to_h(hash)
-        hash.merge(
-          {
-            bookmark: {
-              caption: @caption,
-              url: @url
-            }
+      def block_to_h
+        {
+          bookmark: {
+            caption: @caption,
+            url: @url
           }
-        )
+        }
       end
     end
   end

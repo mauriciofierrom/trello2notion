@@ -14,16 +14,14 @@ module Trello2Notion
         @toggleable = toggleable
       end
 
-      def local_to_h(hash)
-        hash.merge(
-          {
-            @type => {
-              rich_text: @rich_text,
-              color: @color,
-              is_toggleable: @toggeable.nil? ? false : @toggleable
-            }
+      def block_to_h
+        {
+          @type => {
+            rich_text: @rich_text,
+            color: @color,
+            is_toggleable: @toggeable.nil? ? false : @toggleable
           }
-        )
+        }
       end
     end
 

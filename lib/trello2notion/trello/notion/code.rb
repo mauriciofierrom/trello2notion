@@ -12,16 +12,14 @@ module Trello2Notion
         @language = language
       end
 
-      def local_to_h(hash)
-        hash.merge(
-          {
-            code: {
-              caption: @caption,
-              rich_text: @rich_text,
-              language: @language
-            }
+      def block_to_h
+        {
+          code: {
+            caption: @caption,
+            rich_text: @rich_text,
+            language: @language
           }
-        )
+        }
       end
     end
   end
