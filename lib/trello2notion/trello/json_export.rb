@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require "json"
+require "date"
+
+require_relative "trello"
 
 module Trello2Notion
   module Trello
