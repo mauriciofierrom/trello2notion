@@ -34,17 +34,15 @@ end.parse!
 
 case options[:action]
 when :markdown
-  if options[:file]
-    input_file = File.read(options[:file])
-    parsed_board = JSONExport.parse(JSON.parse(input_file))
-    markdown = MarkdownDecorator.new(parsed_board).generate
-    if options[:output_file]
-      File.write(options[:output_file], markdown)
-    else
-      pp markdown
-    end
+  raise "No input file specified. Call trello2notion with the -f / --file flag" unless options[:file]
+
+  input_file = File.read(options[:file])
+  parsed_board = JSONExport.parse(JSON.parse(input_file))
+  markdown = MarkdownDecorator.new(parsed_board).generate
+  if options[:output_file]
+    File.write(options[:output_file], markdown)
   else
-    raise "No input file specified. Call trello2notion with the -f / --file flag"
+    pp markdown
   end
 else
   puts "No action provided"
