@@ -35,6 +35,11 @@ module Trello2Notion
           plain_text: @plain_text
         }
       end
+
+      def self.basic_rich_text(text)
+        rich_text = RichTextContent.new(text, nil)
+        RichText.new(rich_text, nil, text)
+      end
     end
   end
 end

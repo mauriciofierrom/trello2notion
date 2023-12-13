@@ -2,6 +2,7 @@
 
 require_relative "trello2notion/version"
 require_relative "trello2notion/trello/notion"
+require_relative "trello2notion/trello/markdown"
 require_relative "trello2notion/trello/trello"
 
 module Trello2notion
