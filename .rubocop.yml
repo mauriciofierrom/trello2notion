@@ -2,6 +2,7 @@ AllCops:
   Exclude:
     - 'test/**/*.rb'
     - 'vendor/**/*'
+    - 'trello2notion.rb'
   TargetRubyVersion: 3.2.2
   NewCops: enable
 
