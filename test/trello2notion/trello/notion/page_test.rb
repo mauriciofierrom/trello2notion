@@ -6,7 +6,7 @@ class PageTest < Minitest::Test
   include Trello2Notion::Notion
 
   def setup
-    workspace_parent = WorkspaceParent.new(type: :workspace)
+    workspace_parent = WorkspaceParent.new
     rich_text = RichText.new(RichTextContent.new("something in the way she moves", nil), nil, "something in the way she moves")
     paragraph = @object = Paragraph.new(rich_text: [rich_text])
     @page = Page.new(title: "A test page", parent: workspace_parent, children: [paragraph])
