@@ -27,9 +27,23 @@ module Trello2Notion
         {
           cover: @cover,
           icon: @icon,
-          properties: PageProperties.new(@title).to_h,
+          properties: page_title_property,
           parent: @parent,
           children: @children
+        }
+      end
+
+      private
+
+      def page_title_property
+        {
+          title: [
+            {
+              text: {
+                content: @title
+              }
+            }
+          ]
         }
       end
     end

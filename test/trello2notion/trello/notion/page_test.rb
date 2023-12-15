@@ -17,7 +17,13 @@ class PageTest < Minitest::Test
       cover: {},
       icon: {},
       properties: {
-        title: "A test page"
+        title: [
+          {
+            text: {
+              content: "A test page"
+            }
+          }
+        ]
       },
       parent: {
         type: "workspace",
