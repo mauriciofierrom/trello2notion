@@ -26,7 +26,7 @@ class QuoteTest < Minitest::Test
           type: "text",
           text: {
             content: "Paragraph",
-            url: nil
+            link: nil
           },
           annotations: nil,
           plain_text: "Paragraph"
@@ -40,7 +40,7 @@ class QuoteTest < Minitest::Test
               type: "text",
               text: {
                 content: "Paragraph",
-                url: nil
+                link: nil
               },
               annotations: nil,
               plain_text: "Paragraph"

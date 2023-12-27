@@ -24,7 +24,7 @@ class BookmarkTest < Minitest::Test
           type: "text",
           text: {
             content: "Google",
-            url: nil
+            link: nil
           },
           annotations: nil,
           plain_text: "Google"

@@ -26,7 +26,7 @@ class CodeTest < Minitest::Test
           type: "text",
           text: {
             content: "Some caption",
-            url: nil
+            link: nil
           },
           annotations: nil,
           plain_text: "Some caption"
@@ -35,7 +35,7 @@ class CodeTest < Minitest::Test
           type: "text",
           text: {
             content: "x :: Int\nx = 12",
-            url: nil
+            link: nil
           },
           annotations: nil,
           plain_text: "x :: Int\nx = 12"

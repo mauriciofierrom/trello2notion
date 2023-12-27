@@ -24,7 +24,7 @@ class ParagraphTest < Minitest::Test
           type: "text",
           text: {
             content: "something in the way she moves",
-            url: nil
+            link: nil
           },
           annotations: nil,
           plain_text: "something in the way she moves"

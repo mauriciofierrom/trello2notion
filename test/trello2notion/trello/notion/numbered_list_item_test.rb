@@ -25,7 +25,7 @@ class NumberedListItemTest < Minitest::Test
           type: "text",
           text: {
             content: "A list item",
-            url: nil
+            link: nil
           },
           annotations: nil,
           plain_text: "A list item"
