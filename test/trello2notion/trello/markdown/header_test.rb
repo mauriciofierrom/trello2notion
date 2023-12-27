@@ -15,7 +15,7 @@ class HeaderTest < Minitest::Test
     header_element.expect(:options, { level: 1 })
     header_element.expect(:children, [StubbedTextElement.new("Header content")])
 
-    @rich_text = RichText.basic_rich_text("Header content")
+    @rich_text = RichText.basic("Header content")
     @object = Header.new(header_element)
   end
 

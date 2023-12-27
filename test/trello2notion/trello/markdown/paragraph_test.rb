@@ -15,7 +15,7 @@ class MarkdownParagraphTest < Minitest::Test
   end
 
   def test_convert
-    rich_text = Trello2Notion::Notion::RichText.basic_rich_text("A paragraph")
+    rich_text = Trello2Notion::Notion::RichText.basic("A paragraph")
     assert_equal @paragraph.convert.to_json,
                  Trello2Notion::Notion::Paragraph.new(rich_text: [rich_text]).to_json
   end

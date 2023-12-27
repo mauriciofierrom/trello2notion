@@ -17,7 +17,7 @@ class CodeBlockTest < Minitest::Test
   end
 
   def test_convert
-    rich_text = RichText.basic_rich_text("let x = 12\n in x + 5")
+    rich_text = RichText.basic("let x = 12\n in x + 5")
     assert_equal @code_block.convert.to_json, Code.new(rich_text: [rich_text]).to_json
   end
 end

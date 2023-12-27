@@ -17,7 +17,7 @@ module Trello2Notion
       end
 
       def convert
-        rich_text = RichText.basic_rich_text(extract_text)
+        rich_text = RichText.basic(extract_text)
         determine_heading.new(rich_text: [rich_text])
       end
 

@@ -17,7 +17,7 @@ class BlockQuoteTest < Minitest::Test
   end
 
   def test_convert
-    rich_text = RichText.basic_rich_text("A quote")
+    rich_text = RichText.basic("A quote")
     assert_equal @block_quote.convert.to_json, Quote.new(rich_text: [rich_text]).to_json
   end
 end
