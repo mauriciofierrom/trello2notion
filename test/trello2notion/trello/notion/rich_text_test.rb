@@ -14,12 +14,28 @@ class RichTextTest < Minitest::Test
     @rich_text = @object = RichText.new(rich_text_content, nil, text)
   end
 
-  def test_to_h
+  def test_to_h_without_link
     assert_equal @rich_text.to_h, {
       type: "text",
       text: {
         content: "Some text",
-        url: nil
+        link: nil
+      },
+      annotations: nil,
+      plain_text: "Some text"
+    }
+  end
+
+  def test_to_h_with_link
+    with_link = @rich_text.clone
+    with_link.text.link = "https://motherfuckingwebsite.com"
+    assert_equal with_link.to_h, {
+      type: "text",
+      text: {
+        content: "Some text",
+        link: {
+          url: "https://motherfuckingwebsite.com"
+        }
       },
       annotations: nil,
       plain_text: "Some text"
