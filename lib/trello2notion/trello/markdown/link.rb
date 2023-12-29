@@ -37,7 +37,7 @@ module Trello2Notion
         link = @element.attr["href"]
 
         # TODO: Add image and convertion here: Image.new(child).convert
-        [RichText.link(content:, link:)]
+        [Image.new(child).convert, RichText.link(content:, link:)]
       end
     end
   end
