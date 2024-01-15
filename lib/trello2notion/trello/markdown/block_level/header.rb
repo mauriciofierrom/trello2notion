@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "convertible"
-require_relative "../notion/heading"
+require_relative "../convertible"
+require_relative "../../notion/heading"
 
 module Trello2Notion
   module Markdown

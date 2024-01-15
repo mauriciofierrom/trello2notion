@@ -3,7 +3,7 @@
 require "kramdown"
 require "test_helper"
 
-require_relative "convertible_interface_test"
+require_relative "../convertible_interface_test"
 
 class LinkTest < Minitest::Test
   include ConvertibleInterfaceTest
