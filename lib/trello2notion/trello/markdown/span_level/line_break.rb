@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "convertible"
-require_relative "../notion/rich_text"
+require_relative "../convertible"
+require_relative "../../notion/rich_text"
 
 module Trello2Notion
   module Markdown

@@ -3,8 +3,8 @@
 require "kramdown"
 require "test_helper"
 
-require_relative "convertible_interface_test"
-require_relative "stubs/text_element"
+require_relative "../convertible_interface_test"
+require_relative "../stubs/text_element"
 
 class TextTest < Minitest::Test
   include ConvertibleInterfaceTest
