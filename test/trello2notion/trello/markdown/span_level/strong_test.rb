@@ -5,7 +5,7 @@ require "test_helper"
 
 require_relative "../convertible_interface_test"
 
-class EmphasisTest < Minitest::Test
+class StrongTest < Minitest::Test
   include ConvertibleInterfaceTest
   include Trello2Notion::Markdown
   include Trello2Notion::Notion
@@ -14,14 +14,14 @@ class EmphasisTest < Minitest::Test
     text = "have"
     content = RichTextContent.new(text)
     annotations = default_annotations
-    annotations.italic = true
+    annotations.bold = true
     @rich_text = RichText.new(content, annotations, text)
 
     element = Kramdown::Element.new(:em, "have")
-    @emphasis = @object = Emphasis.new(element)
+    @strong = @object = Strong.new(element)
   end
 
   def test_convert
-    assert_equal @emphasis.convert.to_json, @rich_text.to_json
+    assert_equal @strong.convert.to_json, @rich_text.to_json
   end
 end
