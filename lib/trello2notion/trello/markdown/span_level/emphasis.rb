@@ -8,6 +8,7 @@ module Trello2Notion
     # A Markdown emphasis text
     class Emphasis
       include Convertible
+      include Trello2Notion::Notion
 
       def initialize(element)
         @element = element

@@ -8,6 +8,7 @@ module Trello2Notion
     # A Markdown strong text
     class Strong
       include Convertible
+      include Trello2Notion::Notion
 
       def initialize(element)
         @element = element

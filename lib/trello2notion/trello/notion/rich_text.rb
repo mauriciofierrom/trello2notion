@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "json_convertible"
+require_relative "color"
 
 module Trello2Notion
   # Notion RichText
