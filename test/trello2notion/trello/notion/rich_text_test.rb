@@ -41,4 +41,14 @@ class RichTextTest < Minitest::Test
       plain_text: "Some text"
     }
   end
+
+  def test_default_annotations
+    annotations = default_annotations
+    refute annotations.bold
+    refute annotations.italic
+    refute annotations.strikethrough
+    refute annotations.underline
+    refute annotations.code
+    assert_equal annotations.color, COLOR[:default]
+  end
 end

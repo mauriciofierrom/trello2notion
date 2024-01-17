@@ -3,6 +3,7 @@
 require_relative "json_convertible"
 
 module Trello2Notion
+  # Notion RichText
   module Notion
     # Content for the RichText
     RichTextContent = Struct.new(:content, :link) do
@@ -20,6 +21,10 @@ module Trello2Notion
 
     # Annotations to add formatting to RichText
     Annotations = Struct.new(:bold, :italic, :strikethrough, :underline, :code, :color)
+
+    def default_annotations
+      Annotations.new(false, false, false, false, false, COLOR[:default])
+    end
 
     # A Notion rich text
     #
