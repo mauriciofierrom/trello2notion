@@ -53,9 +53,9 @@ module Trello2Notion
         }
       end
 
-      def self.basic(text)
-        rich_text = RichTextContent.new(text, nil)
-        RichText.new(rich_text, nil, text)
+      def self.basic(*)
+        rich_text = RichTextContent.new(*, nil)
+        RichText.new(rich_text, nil, *)
       end
 
       def self.empty
