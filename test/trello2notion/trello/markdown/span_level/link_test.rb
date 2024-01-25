@@ -20,7 +20,7 @@ class LinkTest < Minitest::Test
     text_link = @link.clone
     text_link.element.children << Kramdown::Element.new(:text, "link text")
     text_link.element.attr["href"] = "https://www.google.com"
-    assert_equal text_link.convert[0].to_json, RichText.link(content: "link text", link: "https://www.google.com").to_json
+    assert_equal text_link.convert[1].to_json, RichText.link(content: "link text", link: "https://www.google.com").to_json
   end
 
   def test_convert_image_link_with_alt_text
