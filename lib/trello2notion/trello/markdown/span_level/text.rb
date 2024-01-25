@@ -12,7 +12,7 @@ module Trello2Notion
         @element = element
       end
 
-      def convert
+      def convert(_parent = nil)
         Trello2Notion::Notion::RichText.basic(@element.value)
       end
     end

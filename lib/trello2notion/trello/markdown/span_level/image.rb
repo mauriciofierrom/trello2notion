@@ -6,7 +6,7 @@ module Trello2Notion
   module Markdown
     # A Markdown image
     class Image
-      include Convertible
+      include Trello2Notion::Markdown::Convertible
 
       def initialize(element)
         @element = element

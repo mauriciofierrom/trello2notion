@@ -15,9 +15,37 @@ module Trello2Notion
           .join(" ")
       end
 
-      def convert
+      def convert(parent = nil)
         raise NotImplementedError, "Class #{self.class} must implement method #convert"
       end
+
+      # This can only return an image as an extra block, and rich text (for
+      # now).
+      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      def convert_children
+        stack = @element.children.map { |e| [e, self] }.reverse
+        result = []
+        extra_blocks = []
+
+        until stack.empty?
+          e, p = stack.pop
+          extra, res = Convertible.from_elem(e).convert(p)
+
+          result.concat(res)
+
+          extra_blocks.concat(extra)
+
+          block_children = e.children.filter(&:block?)
+          o = p.element.type == :li ? block_children.filter { |l| %i[ul ol].include? l.type } : block_children
+          o.each { |b| stack.push([b, Convertible.from_elem(e)]) }
+        end
+
+        # FIXME: Why flatten here? There's a mistake somwhere
+        [extra_blocks.flatten, result]
+      end
+      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+
+      # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength
       def self.from_elem(element)
         case element.type
         when :p
@@ -52,6 +80,7 @@ module Trello2Notion
           raise UnsupportedElementError, "Element of type #{element.type} is not supported"
         end
       end
+      # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength
     end
   end
 end
