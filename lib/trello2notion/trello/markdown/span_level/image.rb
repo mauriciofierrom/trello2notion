@@ -12,7 +12,7 @@ module Trello2Notion
         @element = element
       end
 
-      def convert
+      def convert(_parent = nil)
         external_file = Trello2Notion::Notion::ExternalFile.new(url: @element.attr["src"])
         Trello2Notion::Notion::Image.new(file: external_file)
       end

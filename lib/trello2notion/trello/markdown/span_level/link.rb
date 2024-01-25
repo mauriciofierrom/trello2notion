@@ -21,7 +21,7 @@ module Trello2Notion
 
         case child.type
         when :text
-          [RichText.link(content: child.value, link: @element.attr["href"])]
+          [nil, RichText.link(content: child.value, link: @element.attr["href"])]
         when :img
           build_image_parts
         else
