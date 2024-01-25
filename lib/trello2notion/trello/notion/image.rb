@@ -32,6 +32,11 @@ module Trello2Notion
         }
       end
 
+      def self.basic(src:)
+        external_file = ExternalFile.new(url: src)
+        Image.new(file: external_file)
+      end
+
       private
 
       def validate_url(file)
