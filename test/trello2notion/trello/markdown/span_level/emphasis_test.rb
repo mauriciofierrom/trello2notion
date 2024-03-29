@@ -17,7 +17,8 @@ class EmphasisTest < Minitest::Test
     annotations.italic = true
     @rich_text = RichText.new(content, annotations, text)
 
-    element = Kramdown::Element.new(:em, "have")
+    element = Kramdown::Element.new(:em)
+    element.children = [Kramdown::Element.new(:text, "have")]
     @emphasis = @object = Emphasis.new(element)
   end
 

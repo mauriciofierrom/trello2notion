@@ -15,11 +15,12 @@ module Trello2Notion
       end
 
       def convert
-        content = RichTextContent.new(@element.value)
+        text = @element.children.map(&:value).join
+        content = RichTextContent.new(text)
         annotations = default_annotations
         annotations.italic = true
 
-        RichText.new(content, annotations, @element.value)
+        RichText.new(content, annotations, text)
       end
     end
   end
