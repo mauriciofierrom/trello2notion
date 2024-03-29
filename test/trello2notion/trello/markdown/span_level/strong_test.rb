@@ -17,7 +17,8 @@ class StrongTest < Minitest::Test
     annotations.bold = true
     @rich_text = RichText.new(content, annotations, text)
 
-    element = Kramdown::Element.new(:em, "have")
+    element = Kramdown::Element.new(:strong)
+    element.children = [Kramdown::Element.new(:text, "have")]
     @strong = @object = Strong.new(element)
   end
 
