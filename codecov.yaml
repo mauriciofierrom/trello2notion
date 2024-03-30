@@ -1,0 +1,3 @@
+---
+ignore:
+  - lib/trello2notion/trello/debug.rb
