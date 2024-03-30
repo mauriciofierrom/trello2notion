@@ -50,6 +50,8 @@ module Trello2Notion
         case element.type
         when :p
           Paragraph.new(element)
+        when :blank
+          Blank.new(element)
         when :blockquote
           BlockQuote.new(element)
         when :codeblock
