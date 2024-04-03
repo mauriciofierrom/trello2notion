@@ -8,6 +8,7 @@ module Trello2Notion
     # A Markdown codespan
     class CodeSpan
       include Convertible
+      include Trello2Notion::Notion
 
       def initialize(element)
         @element = element
