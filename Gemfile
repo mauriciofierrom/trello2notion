@@ -14,6 +14,8 @@ gem "simplecov", "~> 0.22.0", require: false, group: :test
 
 gem "simplecov-cobertura", "~> 2.1", require: false, group: :test
 
+gem "simplecov-console", "~> 0.9.1", require: false, group: :test
+
 gem "kramdown", "~> 2.4"
 
 gem "guard", "~> 2.18", require: false, group: :development
