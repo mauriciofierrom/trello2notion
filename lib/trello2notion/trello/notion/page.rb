@@ -12,7 +12,7 @@ module Trello2Notion
     class Page
       include JsonConvertible
 
-      attr_accessor :cover, :icon, :properties, :parent
+      attr_accessor :cover, :icon, :properties, :parent, :children
 
       def initialize(cover = {}, icon = {}, title:, parent:, children: [])
         @title = title
@@ -29,7 +29,7 @@ module Trello2Notion
           icon: @icon,
           properties: page_title_property,
           parent: @parent,
-          children: @children
+          children: @children.map(&:to_h)
         }
       end
 
