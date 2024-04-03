@@ -13,7 +13,7 @@ module Trello2Notion
 
       def convert
         rich_text = [RichText.empty]
-        Trello2Notion::Notion::Paragraph.new(rich_text:)
+        [Trello2Notion::Notion::Paragraph.new(rich_text:)]
       end
     end
   end

@@ -19,6 +19,6 @@ class BlankTest < Minitest::Test
   end
 
   def test_convert
-    assert_equal @blank.convert.to_json, @empty_paragraph.to_json
+    assert_equal @blank.convert.first.to_json, @empty_paragraph.to_json
   end
 end
