@@ -4,7 +4,12 @@ require "simplecov"
 SimpleCov.start
 
 require "simplecov-cobertura"
-SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+require "simplecov-console"
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
+  SimpleCov::Formatter::CoberturaFormatter,
+  SimpleCov::Formatter::Console
+])
 
 $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 
