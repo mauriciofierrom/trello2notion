@@ -25,7 +25,7 @@ class BlockTest < Minitest::Test
 
   def test_to_json
     assert_equal @stubbed_block.to_json, {
-      object: :object,
+      object: :block,
       type: "stubbed_block"
     }.to_json
   end

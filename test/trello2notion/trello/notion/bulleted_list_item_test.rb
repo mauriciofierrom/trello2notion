@@ -18,7 +18,7 @@ class BulletedListItemTest < Minitest::Test
 
   def test_to_json
     assert_equal @bulleted_list_item.to_json, {
-      object: "object",
+      object: "block",
       type: "bulleted_list_item",
       bulleted_list_item: {
         rich_text: [
@@ -27,7 +27,7 @@ class BulletedListItemTest < Minitest::Test
             content: "A list item",
             link: nil
           },
-          annotations: nil,
+          annotations: {},
           plain_text: "A list item"
         ],
         color: "default",

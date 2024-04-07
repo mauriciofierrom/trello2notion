@@ -18,7 +18,7 @@ class HeadingTest < Minitest::Test
 
   def test_to_json
     assert_equal @heading1.to_json, {
-      object: "object",
+      object: "block",
       type: "heading_1",
       heading_1: {
         rich_text: [
@@ -27,7 +27,7 @@ class HeadingTest < Minitest::Test
             content: "Title",
             link: nil
           },
-          annotations: nil,
+          annotations: {},
           plain_text: "Title"
         ],
       color: "default",

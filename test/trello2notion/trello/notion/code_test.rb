@@ -19,7 +19,7 @@ class CodeTest < Minitest::Test
 
   def test_to_json
     assert_equal @code.to_json, {
-      object: "object",
+      object: "block",
       type: "code",
       code: {
         caption: [
@@ -28,7 +28,7 @@ class CodeTest < Minitest::Test
             content: "Some caption",
             link: nil
           },
-          annotations: nil,
+          annotations: {},
           plain_text: "Some caption"
         ],
         rich_text: [
@@ -37,7 +37,7 @@ class CodeTest < Minitest::Test
             content: "x :: Int\nx = 12",
             link: nil
           },
-          annotations: nil,
+          annotations: {},
           plain_text: "x :: Int\nx = 12"
         ],
         language: "haskell"

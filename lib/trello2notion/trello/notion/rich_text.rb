@@ -48,7 +48,7 @@ module Trello2Notion
         {
           type: @type,
           text: @text.to_h,
-          annotations: @annotations&.to_h,
+          annotations: @annotations.to_h,
           plain_text: @plain_text
         }
       end

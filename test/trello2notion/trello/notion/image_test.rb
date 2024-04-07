@@ -17,7 +17,7 @@ class ImageTest < Minitest::Test
 
   def test_to_json
     assert_equal @image.to_json, {
-      object: "object",
+      object: "block",
       type: "image",
       image: {
         type: "external",
