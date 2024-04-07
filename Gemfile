@@ -23,3 +23,5 @@ gem "guard", "~> 2.18", require: false, group: :development
 gem "guard-minitest", "~> 2.4", require: false, group: :development
 
 gem "minitest-reporters", "~> 1.6"
+
+gem "faraday", "~> 2.9.0"
