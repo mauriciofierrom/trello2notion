@@ -17,7 +17,7 @@ class ParagraphTest < Minitest::Test
 
   def test_to_json
     assert_equal @paragraph.to_json, {
-      object: "object",
+      object: "block",
       type: "paragraph",
       paragraph: {
         rich_text: [
@@ -26,7 +26,7 @@ class ParagraphTest < Minitest::Test
             content: "something in the way she moves",
             link: nil
           },
-          annotations: nil,
+          annotations: {},
           plain_text: "something in the way she moves"
         ]
       }

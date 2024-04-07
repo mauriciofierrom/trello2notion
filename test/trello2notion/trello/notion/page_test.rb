@@ -14,8 +14,8 @@ class PageTest < Minitest::Test
 
   def test_to_json
     assert_equal @page.to_json, {
-      cover: {},
-      icon: {},
+      cover: nil,
+      icon: nil,
       properties: {
         title: [
           {
@@ -31,7 +31,7 @@ class PageTest < Minitest::Test
       },
       children: [
         {
-          object: "object",
+          object: "block",
           type: "paragraph",
           paragraph: {
             rich_text: [
@@ -40,7 +40,7 @@ class PageTest < Minitest::Test
                 content: "something in the way she moves",
                 link: nil
               },
-              annotations: nil,
+              annotations: {},
               plain_text: "something in the way she moves"
             ]
           }

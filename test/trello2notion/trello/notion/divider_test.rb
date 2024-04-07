@@ -17,7 +17,7 @@ class DividerTest < Minitest::Test
 
   def test_to_json
     assert_equal @divider.to_json, {
-      object: "object",
+      object: "block",
       type: "divider",
       divider: {}
     }.to_json

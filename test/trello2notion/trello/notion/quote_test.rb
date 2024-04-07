@@ -19,7 +19,7 @@ class QuoteTest < Minitest::Test
 
   def test_to_json
     assert_equal @quote.to_json, {
-      object: "object",
+      object: "block",
       type: "quote",
       quote: {
         rich_text: [
@@ -28,12 +28,12 @@ class QuoteTest < Minitest::Test
             content: "Paragraph",
             link: nil
           },
-          annotations: nil,
+          annotations: {},
           plain_text: "Paragraph"
         ],
         color: "default",
         children: [{
-          object: "object",
+          object: "block",
           type: "paragraph",
           paragraph: {
             rich_text: [
@@ -42,7 +42,7 @@ class QuoteTest < Minitest::Test
                 content: "Paragraph",
                 link: nil
               },
-              annotations: nil,
+              annotations: {},
               plain_text: "Paragraph"
             ]
           }

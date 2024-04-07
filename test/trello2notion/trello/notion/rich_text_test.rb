@@ -21,7 +21,7 @@ class RichTextTest < Minitest::Test
         content: "Some text",
         link: nil
       },
-      annotations: nil,
+      annotations: {},
       plain_text: "Some text"
     }
   end
@@ -37,7 +37,7 @@ class RichTextTest < Minitest::Test
           url: "https://motherfuckingwebsite.com"
         }
       },
-      annotations: nil,
+      annotations: {},
       plain_text: "Some text"
     }
   end

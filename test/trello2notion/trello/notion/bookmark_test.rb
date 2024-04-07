@@ -17,7 +17,7 @@ class BookmarkTest < Minitest::Test
 
   def test_to_json
     assert_equal @bookmark.to_json, {
-      object: "object",
+      object: "block",
       type: "bookmark",
       bookmark: {
         caption: [
@@ -26,7 +26,7 @@ class BookmarkTest < Minitest::Test
             content: "Google",
             link: nil
           },
-          annotations: nil,
+          annotations: {},
           plain_text: "Google"
         ],
         url: "https://www.google.com"

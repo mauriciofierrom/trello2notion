@@ -21,7 +21,7 @@ module Trello2Notion
 
       def local_to_h
         {
-          object: @object,
+          object: "block",
           type: @type
         }.merge block_to_h
       end

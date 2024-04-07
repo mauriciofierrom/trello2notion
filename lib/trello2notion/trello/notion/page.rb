@@ -14,7 +14,7 @@ module Trello2Notion
 
       attr_accessor :cover, :icon, :properties, :parent, :children
 
-      def initialize(cover = {}, icon = {}, title:, parent:, children: [])
+      def initialize(cover = nil, icon = nil, title:, parent:, children: [])
         @title = title
         @cover = cover
         @icon = icon
