@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require "test_helper"
+require "kramdown"
 
 require_relative "../convertible_interface_test"
-require_relative "../stubs/text_element"
 
 class CodeBlockTest < Minitest::Test
   include ConvertibleInterfaceTest
@@ -11,9 +11,8 @@ class CodeBlockTest < Minitest::Test
   include Trello2Notion::Markdown
 
   def setup
-    code_block_element = Minitest::Mock.new
-    code_block_element.expect(:children, [StubbedTextElement.new("let x = 12\n in x + 5")])
-    @code_block = @object = CodeBlock.new(code_block_element)
+    element = Kramdown::Element.new(:codeblock, "let x = 12\n in x + 5")
+    @code_block = @object = CodeBlock.new(element)
   end
 
   def test_convert
