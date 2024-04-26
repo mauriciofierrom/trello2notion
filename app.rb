@@ -7,8 +7,7 @@ require_relative "lib/trello2notion/trello/decorators"
 require_relative "lib/trello2notion/trello/notion/client"
 require_relative "lib/trello2notion/trello/notion/parent"
 
-FunctionsFramework.http "trello2notion" do |request|
-  case request["action"]
-  when :markdown
-    # process and upload resulting file to a google cloud bucket
+
+FunctionsFramework.cloud_event "trello2notion" do |cloud_event|
+  # code here
 end
