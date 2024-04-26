@@ -29,6 +29,16 @@
     };
     version = "3.2.4";
   };
+  cloud_events = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0w7mlkwb4923dwg0q614lz2bryb35s7aj3p3fskk2wcixr4kf257";
+      type = "gem";
+    };
+    version = "0.7.1";
+  };
   coderay = {
     groups = ["default" "development"];
     platforms = [];
@@ -90,6 +100,17 @@
       type = "gem";
     };
     version = "1.1.0";
+  };
+  functions_framework = {
+    dependencies = ["cloud_events" "puma" "rack"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1lmqcpw13aq4l0pxb7cndvxjir7fh03p6qx5da467v184anmx1a5";
+      type = "gem";
+    };
+    version = "1.4.1";
   };
   guard = {
     dependencies = ["formatador" "listen" "lumberjack" "nenv" "notiffany" "pry" "shellany" "thor"];
@@ -227,6 +248,16 @@
     };
     version = "0.4.1";
   };
+  nio4r = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "15iwbiij52x6jhdbl0rkcldnhfndmsy0sbnsygkr9vhskfqrp72m";
+      type = "gem";
+    };
+    version = "2.7.1";
+  };
   notiffany = {
     dependencies = ["nenv" "shellany"];
     groups = ["default" "development"];
@@ -270,6 +301,17 @@
     };
     version = "0.14.2";
   };
+  puma = {
+    dependencies = ["nio4r"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0i2vaww6qcazj0ywva1plmjnj6rk23b01szswc5jhcq7s2cikd1y";
+      type = "gem";
+    };
+    version = "6.4.2";
+  };
   racc = {
     groups = ["default"];
     platforms = [];
@@ -279,6 +321,16 @@
       type = "gem";
     };
     version = "1.7.3";
+  };
+  rack = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0x3mijjklsrlzfmwqp7x58fla7sk8pfwijhk988nmba787r8rf9g";
+      type = "gem";
+    };
+    version = "3.0.10";
   };
   rainbow = {
     groups = ["default"];
