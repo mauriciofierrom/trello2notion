@@ -5,4 +5,4 @@ let
     gemdir = ./.;
     ruby = pkgs.ruby_3_2;
   };
-in pkgs.mkShell { packages = [ gems gems.wrappedRuby ]; }
+in pkgs.mkShell { packages = [ gems gems.wrappedRuby pkgs.terraform pkgs.google-cloud-sdk-gce]; }
