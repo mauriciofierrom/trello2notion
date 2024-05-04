@@ -23,20 +23,6 @@ resource "google_storage_bucket" "source-bucket" {
   uniform_bucket_level_access = true
 }
 
-# Function file for the biz function
-resource "google_storage_bucket_object" "trello2notion-function-file" {
-  name   = "trello2notion-function.zip"
-  bucket = google_storage_bucket.source-bucket.name
-  source = "trello2notion-function.zip"  # Add path to the zipped function source code
-}
-
-# Function file for the biz function
-resource "google_storage_bucket_object" "rate-limiter-function-file" {
-  name   = "rate-limiter-function.zip"
-  bucket = google_storage_bucket.source-bucket.name
-  source = "rate-limiter-function.zip"  # Add path to the zipped function source code
-}
-
 # Target bucket where file upload triggers the cloud event to be
 # processed by the cloud event function
 resource "google_storage_bucket" "trigger-bucket" {
@@ -90,79 +76,25 @@ resource "google_storage_bucket_iam_member" "object-creation" {
   member   = "serviceAccount:${google_service_account.account.email}"
 }
 
-resource "google_cloudfunctions2_function" "trello2notion-function" {
-  depends_on = [
+module "trello2notion-function" {
+  source = "./modules/function"
+
+  source_bucket = google_storage_bucket.source-bucket.name
+  dependencies = [
     google_project_iam_member.event-receiving,
     google_project_iam_member.artifactregistry-reader,
   ]
-  name = "trello2notion-function"
-  location = "us-central1"
-  description = "Performs the conversion from Trello JSON export files"
-
-  build_config {
-    runtime     = "ruby"
-    entry_point = "trello2notion" # Set the entry point in the code
-    environment_variables = {
-      BUILD_CONFIG_TEST = "build_test"
-    }
-    source {
-      storage_source {
-        bucket = google_storage_bucket.source-bucket.name
-        object = google_storage_bucket_object.trello2notion.name
-      }
-    }
-  }
-
-  service_config {
-    max_instance_count  = 3
-    min_instance_count = 1
-    available_memory    = "256M"
-    timeout_seconds     = 60
-    environment_variables = {
-        SERVICE_CONFIG_TEST = "config_test"
-    }
-    ingress_settings = "ALLOW_INTERNAL_ONLY"
-    all_traffic_on_latest_revision = true
-    service_account_email = google_service_account.account.email
-  }
-
-  event_trigger {
-    event_type = "google.cloud.storage.object.v1.finalized"
-    retry_policy = "RETRY_POLICY_RETRY"
-    service_account_email = google_service_account.account.email
-    event_filters {
-      attribute = "bucket"
-      value = google_storage_bucket.trigger-bucket.name
-    }
-  }
+  account_email = google_service_account.account.email
+  trigger_bucket = google_storage_bucket.trigger-bucket.name
 }
 
-resource "google_cloudfunctions2_function" "rate-limiter" {
-  depends_on = [
-    google_storage_bucket_iam_member.object-creation,
+module "rate-limiter-function" {
+  source = "./modules/rate-limiter"
+
+  source_bucket = google_storage_bucket.source-bucket.name
+  dependencies = [
+    google_project_iam_member.object-creation
   ]
-  name = "rate-limiter"
-  location = "us-central1"
-  description = "The rate limiter based on upstash's library"
-
-  build_config {
-    runtime = "nodejs20"
-    entry_point = "rate-limiter"  # Set the entry point
-    source {
-      storage_source {
-        bucket = google_storage_bucket.bucket.name
-        object = google_storage_bucket_object.object.name
-      }
-    }
-  }
-
-  service_config {
-    max_instance_count  = 1
-    available_memory    = "256M"
-    timeout_seconds     = 60
-  }
-}
-
-output "function_uri" {
-  value = google_cloudfunctions2_function.rate_limiter.service_config[0].uri
+  account_email = google_service_account.account.email
+  trigger_bucket = google_storage_bucket.trigger-bucket.name
 }
