@@ -4,8 +4,16 @@ resource "google_storage_bucket_object" "trello2notion-function-file" {
   source = "trello2notion-function.zip"  # Add path to the zipped function source code
 }
 
+resource "google_storage_bucket_iam_member" "object-creation" {
+  bucket = var.trigger_bucket
+  role    = "roles/storage.objects.create"
+  member   = "serviceAccount:${var.account_email}"
+}
+
 resource "google_cloudfunctions2_function" "trello2notion-function" {
-  depends_on = var.dependencies
+  depends_on = [
+    google_storage_bucket_iam_member.object-creation
+  ]
   name = "trello2notion-function"
   location = "us-central1"
   description = "Performs the conversion from Trello JSON export files"
@@ -19,7 +27,7 @@ resource "google_cloudfunctions2_function" "trello2notion-function" {
     source {
       storage_source {
         bucket = var.source_bucket
-        object = google_storage_bucket_object.trello2notion-file
+        object = google_storage_bucket_object.trello2notion-function-file
       }
     }
   }
