@@ -10,3 +10,4 @@
 .direnv
 terraform/secrets.tfvars
 terraform/.*
+**/node_modules/
