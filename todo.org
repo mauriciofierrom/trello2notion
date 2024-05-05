@@ -1,0 +1,20 @@
+#+title: Tasks
+
+* Tasks [0/4]
+** [ ] Write the rate limiter http cloud function [0/4]
+The cloud function that will receive the files and also defend against the thingy
+*** [ ] Research and implement the rate limit mechanism using the upstash library
+*** [ ] Validate the file upload
+*** [ ] Re-upload to the trigger bucket via the nodejs client library for GCS
+*** [ ] Compress and upload to source bucket via CI/CD pipeline
+** [ ] Write the budget limit shutdown function [/]
+The cloud function that should react to budget alerts and shut down billing asap
+*** [ ] Setup the budget via terraform
+*** [ ] Implement the function
+*** [ ] Compress and upload to source bucket via CI/CD pipeline
+** [ ] Adapt the main project to a cloud event function [/]
+Add an app.rb file that turns the project into a google cloud function
+*** [ ] Fetch the file object and the generating method from the cloud event
+*** [ ] Call the appropriate generator based on parameters
+*** [ ] If Markdown upload to GCS and send email with file link
+*** [ ] If Notion send email with resulting master page link (higher level page generated for the board)
