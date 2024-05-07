@@ -8,3 +8,5 @@
 /tmp/
 .envrc
 .direnv
+terraform/secrets.tfvars
+terraform/.*
