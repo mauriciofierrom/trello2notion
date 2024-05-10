@@ -25,3 +25,5 @@ gem "guard-minitest", "~> 2.4", require: false, group: :development
 gem "minitest-reporters", "~> 1.6"
 
 gem "faraday", "~> 2.9.0"
+
+gem "rubyzip", "~> 2.3.2"
