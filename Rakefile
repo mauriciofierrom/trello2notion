@@ -30,4 +30,18 @@ task :package_function do
   puts "Directory has been zipped to #{zip_file_name}"
 end
 
+task terraform: :package_function do
+  Dir.chdir("terraform") do
+    sh "terraform init"
+    sh "terraform plan -var-file=secrets.tfvars -out=tfplan"
+    sh "terraform apply -auto-approve tfplan"
+  end
+end
+
+task :terraform_destroy do
+  Dir.chdir("terraform") do
+    sh "terraform destroy -var-file=secrets.tfvars"
+  end
+end
+
 task default: %i[test rubocop]
