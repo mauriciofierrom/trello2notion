@@ -10,4 +10,5 @@
 .direnv
 terraform/secrets.tfvars
 terraform/.*
+terraform/budget-alert-function.zip
 **/node_modules/
