@@ -34,6 +34,15 @@ resource "google_project_iam_member" "invoking" {
   member  = "serviceAccount:${google_service_account.account.email}"
 }
 
+resource "google_storage_bucket_iam_binding" "creator" {
+  bucket = google_storage_bucket.trigger-bucket.name
+  role   = "roles/storage.objectCreator"
+
+  members = [
+    "serviceAccount:${google_service_account.account.email}",
+  ]
+}
+
 module "budget-alert-function" {
   source = "./modules/budget-alert"
 

@@ -1,0 +1,69 @@
+const fs = require("fs");
+const Busboy = require("busboy");
+const path = require("path");
+const os = require("os");
+const uploadToGcs = require("../services/gcs-upload");
+
+module.exports = (req, res) => {
+  if (req.method === "POST") {
+    const bb = Busboy({
+      headers: req.headers,
+      limits: { fileSize: 10 * 1024 * 1024 },
+    });
+    const tmpdir = os.tmpdir();
+    const fileWrites = [];
+    const uploads = {};
+    const fields = {};
+
+    bb.on("file", (fieldname, file, { filename }) => {
+      console.log(`Processed file ${filename}`);
+      const filepath = path.join(tmpdir, filename);
+      uploads[fieldname] = filepath;
+
+      const writeStream = fs.createWriteStream(filepath);
+      file.pipe(writeStream);
+
+      const promise = new Promise((resolve, reject) => {
+        file.on("end", () => {
+          writeStream.end();
+        });
+        writeStream.on("close", resolve);
+        writeStream.on("error", reject);
+      });
+
+      fileWrites.push(promise);
+    });
+
+    bb.on("field", (name, val) => {
+      fields[name] = val;
+    });
+
+    bb.on("finish", async () => {
+      await Promise.all(fileWrites);
+
+      for (const file in uploads) {
+        if (validateFileType(uploads[file])) {
+          await uploadToGcs(uploads[file], fields.method);
+        } else {
+          res.status(400).send("Not a valid JSON file");
+        }
+
+        fs.unlinkSync(uploads[file]);
+      }
+    });
+
+    bb.end(req.rawBody);
+  } else {
+    res.status(400).send("Not a POST request");
+  }
+};
+
+const validateFileType = (filepath) => {
+  try {
+    const content = fs.readFileSync(filepath);
+    JSON.parse(content);
+    return true;
+  } catch {
+    return false;
+  }
+};
