@@ -1,0 +1,28 @@
+{
+  "name": "rate-limiter",
+  "description": "Entry point HTTP cloud function with rate limiting capabilities",
+  "version": "1.0.0",
+  "author": "Mauricio Fierro <mauriciofierrom@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx functions-framework --target=rate-limiter"
+  },
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.4.0",
+    "@google-cloud/storage": "^7.10.2",
+    "@upstash/ratelimit": "^1.1.3",
+    "@upstash/redis": "^1.30.0",
+    "axios": "^1.7.0",
+    "busboy": "^1.6.0",
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^3.1.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.3.0",
+    "eslint": "^9.3.0",
+    "globals": "^15.3.0",
+    "prettier": "3.2.5"
+  }
+}
