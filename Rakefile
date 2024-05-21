@@ -14,20 +14,32 @@ require "rubocop/rake_task"
 
 RuboCop::RakeTask.new
 
-task :package_function do
-  directory_to_zip = "support/budget-alert/"
-  zip_file_name = "terraform/budget-alert-function.zip"
-  files_to_include = Dir[File.join(directory_to_zip, "**", "*")].reject { |f| f.include?("node_modules") }
+task :package_functions do
+  # Array of the functions to pack
+  functions = %w[budget-alert rate-limiter]
 
-  FileUtils.rm_f(zip_file_name)
+  # Array of directories to exclude. If any of the paths include these dirs the path is excluded
+  # from the zip file.
+  exclude = %w[node_modules]
 
-  Zip::File.open(zip_file_name, Zip::File::CREATE) do |zipfile|
-    files_to_include.each do |file|
-      zipfile.add(file.sub(directory_to_zip, ""), file)
+  functions.each do |function|
+    directory_to_zip = "support/#{function}/"
+    zip_file_name = "terraform/#{function}-function.zip"
+    files_to_include =
+      Dir[File.join(directory_to_zip, "**", "*")].reject { |f| exclude.any? { |e| f.include?(e) } }
+
+    FileUtils.rm_f(zip_file_name)
+
+    Zip::File.open(zip_file_name, Zip::File::CREATE) do |zipfile|
+      files_to_include.each do |file|
+        zipfile.add(file.sub(directory_to_zip, ""), file)
+      end
     end
+
+    puts "Directory has been zipped to #{zip_file_name}"
   end
 
-  puts "Directory has been zipped to #{zip_file_name}"
+  puts "Finished packaging functions"
 end
 
 task terraform: :package_function do
