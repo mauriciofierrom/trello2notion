@@ -1,4 +1,4 @@
-{pkgs ? import <nixpkgs> {}}:
+{pkgs ? import <nixpkgs> { overlays = [ (import ./overlay.nix) ]; }}:
 let
   gems = pkgs.bundlerEnv {
     name = "bundle";
