@@ -13,3 +13,8 @@ variable "redis_token" {
   type = string
   description = "Upstash redis token to set in function's environment variable"
 }
+
+variable "sendgrid_api_key" {
+  type = string
+  description = "Sendgrid api token to set in the function's environment variable"
+}

@@ -61,6 +61,15 @@ resource "google_storage_bucket_iam_binding" "creator" {
   ]
 }
 
+resource "google_storage_bucket_iam_binding" "viewer" {
+  bucket = google_storage_bucket.trigger-bucket.name
+  role   = "roles/storage.objectViewer"
+
+  members = [
+    "serviceAccount:${google_service_account.account.email}",
+  ]
+}
+
 module "budget-alert-function" {
   source = "./modules/budget-alert"
 
@@ -78,4 +87,14 @@ module "rate-limit-function" {
   redis_url = var.redis_url
   redis_token = var.redis_token
   trigger_bucket = google_storage_bucket.trigger-bucket.name
+}
+
+module "conversor-function" {
+  source = "./modules/conversor"
+  depends_on = [ module.rate-limit-function ]
+
+  source_bucket = google_storage_bucket.source-bucket.name
+  trigger_bucket = google_storage_bucket.trigger-bucket.name
+  account_email = google_service_account.account.email
+  sendgrid_api_key = var.sendgrid_api_key
 }
