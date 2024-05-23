@@ -27,3 +27,9 @@ gem "minitest-reporters", "~> 1.6"
 gem "faraday", "~> 2.9.0"
 
 gem "rubyzip", "~> 2.3.2"
+
+gem "google-cloud-storage", "~> 1.51"
+
+gem "sendgrid-ruby", "~> 6.7"
+
+gem "functions_framework", "~> 1.4", ">= 1.4.1"
