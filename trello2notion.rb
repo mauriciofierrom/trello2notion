@@ -58,7 +58,7 @@ when :notion
   page_id = notion_client.create_page(base_page.to_json)
   subpages_builder.call(page_id:).each do |subpage|
     notion_client.create_page(subpage.to_json)
-  rescue e
+  rescue
     pp subpage
   end
 else
