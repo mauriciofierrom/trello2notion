@@ -14,19 +14,32 @@ require "rubocop/rake_task"
 
 RuboCop::RakeTask.new
 
+# rubocop:disable Metrics/BlockLength
 task :package_functions do
-  # Array of the functions to pack
-  functions = %w[budget-alert rate-limiter]
-
-  # Array of directories to exclude. If any of the paths include these dirs the path is excluded
-  # from the zip file.
-  exclude = %w[node_modules]
+  # Functions to pack
+  functions = [
+    {
+      name: "budget-alert",
+      dir: "support/budget-alert",
+      exclude: %w[node_modules]
+    },
+    {
+      name: "rate-limiter",
+      dir: "support/rate-limiter",
+      exclude: %w[node_modules]
+    },
+    {
+      name: "conversor",
+      dir: ".",
+      exclude: %w[support terraform]
+    }
+  ]
 
   functions.each do |function|
-    directory_to_zip = "support/#{function}/"
-    zip_file_name = "terraform/#{function}-function.zip"
+    directory_to_zip = "#{function[:dir]}/"
+    zip_file_name = "terraform/#{function[:name]}-function.zip"
     files_to_include =
-      Dir[File.join(directory_to_zip, "**", "*")].reject { |f| exclude.any? { |e| f.include?(e) } }
+      Dir[File.join(directory_to_zip, "**", "*")].reject { |f| function[:exclude].any? { |e| f.include?(e) } }
 
     FileUtils.rm_f(zip_file_name)
 
@@ -41,6 +54,7 @@ task :package_functions do
 
   puts "Finished packaging functions"
 end
+# rubocop:enable Metrics/BlockLength
 
 task terraform: :package_function do
   Dir.chdir("terraform") do
