@@ -23,7 +23,7 @@ resource "google_storage_bucket" "result-bucket" {
 
 # Make the bucket publicly accesible to users.
 resource "google_storage_bucket_iam_binding" "public_access" {
-  bucket   = var.trigger_bucket
+  bucket   = google_storage_bucket.result-bucket.name
   role     = "roles/storage.objectViewer"
   members  = ["allUsers"]
 }
