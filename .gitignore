@@ -12,3 +12,4 @@ terraform/secrets.tfvars
 terraform/.*
 terraform/*.zip
 **/node_modules/
+tfplan
