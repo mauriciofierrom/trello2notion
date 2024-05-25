@@ -56,7 +56,7 @@ task :package_functions do
 end
 # rubocop:enable Metrics/BlockLength
 
-task terraform: :package_function do
+task terraform: :package_functions do
   Dir.chdir("terraform") do
     sh "terraform init"
     sh "terraform plan -var-file=secrets.tfvars -out=tfplan"
