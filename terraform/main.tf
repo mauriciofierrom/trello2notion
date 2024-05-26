@@ -70,6 +70,10 @@ resource "google_storage_bucket_iam_binding" "viewer" {
   ]
 }
 
+resource "google_pubsub_topic" "file-ready-topic" {
+  name = "t2n-file-ready"
+}
+
 module "budget-alert-function" {
   source = "./modules/budget-alert"
 
@@ -97,4 +101,5 @@ module "conversor-function" {
   trigger_bucket = google_storage_bucket.trigger-bucket.name
   account_email = google_service_account.account.email
   sendgrid_api_key = var.sendgrid_api_key
+  pubsub_topic = google_pubsub_topic.file-ready-topic.id
 }

@@ -21,6 +21,15 @@ resource "google_storage_bucket" "result-bucket" {
   }
 }
 
+resource "google_storage_bucket_iam_binding" "creator" {
+  bucket = google_storage_bucket.result-bucket.name
+  role   = "roles/storage.objectCreator"
+
+  members = [
+    "serviceAccount:${var.account_email}",
+  ]
+}
+
 # Make the bucket publicly accesible to users.
 resource "google_storage_bucket_iam_binding" "public_access" {
   bucket   = google_storage_bucket.result-bucket.name
@@ -59,12 +68,9 @@ resource "google_cloudfunctions2_function" "conversor" {
 
   event_trigger {
     trigger_region = "us-central1"
-    event_type = "google.cloud.storage.object.v1.finalized"
+    event_type = "google.cloud.pubsub.topic.v1.messagePublished"
     retry_policy = "RETRY_POLICY_DO_NOT_RETRY"
     service_account_email = var.account_email
-    event_filters {
-      attribute = "bucket"
-      value = var.trigger_bucket
-    }
+    pubsub_topic = var.pubsub_topic
   }
 }

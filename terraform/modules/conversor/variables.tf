@@ -17,3 +17,8 @@ variable "sendgrid_api_key" {
   type = string
   description = "Sendgrid api token to set in the function's environment variable"
 }
+
+variable "pubsub_topic" {
+  type = string
+  description = "The id for the pubsub topic to trigger the function from"
+}
