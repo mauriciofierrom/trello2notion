@@ -3,6 +3,7 @@ const Busboy = require("busboy");
 const path = require("path");
 const os = require("os");
 const uploadToGcs = require("../services/gcs-upload");
+const publish = require("../services/publish");
 
 module.exports = (req, res) => {
   if (req.method === "POST") {
@@ -43,7 +44,12 @@ module.exports = (req, res) => {
 
       for (const file in uploads) {
         if (validateFileType(uploads[file])) {
-          await uploadToGcs(uploads[file], fields.method);
+          const uploadedFile = await uploadToGcs(uploads[file]);
+          await publish({
+            method: fields.method,
+            email: fields.email,
+            file: uploadedFile.name
+          });
         } else {
           res.status(400).send("Not a valid JSON file");
         }
