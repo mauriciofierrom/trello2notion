@@ -55,3 +55,12 @@ resource "google_cloudfunctions2_function" "rate-limiter" {
     }
   }
 }
+
+resource "google_cloud_run_service_iam_binding" "default" {
+  location = google_cloudfunctions2_function.rate-limiter.location
+  service  = google_cloudfunctions2_function.rate-limiter.name
+  role     = "roles/run.invoker"
+  members = [
+    "allUsers"
+  ]
+}
