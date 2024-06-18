@@ -4,9 +4,11 @@ const path = require("path");
 const os = require("os");
 const uploadToGcs = require("../services/gcs-upload");
 const publish = require("../services/publish");
+const Firestore = require('@google-cloud/firestore');
 
 module.exports = (req, res) => {
-  if (req.method === "POST") {
+  // We're getting the form data with the file to convert
+  if (req.method === "POST" && req.contentType === "multipart/form-data") {
     const bb = Busboy({
       headers: req.headers,
       limits: { fileSize: 10 * 1024 * 1024 },
