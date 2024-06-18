@@ -2,7 +2,7 @@ terraform {
   required_providers {
     google = {
       source = "hashicorp/google"
-      version = "4.51.0"
+      version = "5.34.0"
     }
   }
 
@@ -72,6 +72,13 @@ resource "google_storage_bucket_iam_binding" "viewer" {
 
 resource "google_pubsub_topic" "file-ready-topic" {
   name = "t2n-file-ready"
+}
+
+resource "google_firestore_database" "notion-tokens" {
+  project = "trello2notion"
+  name = "t2n-notion-tokens"
+  location_id = "us-central1"
+  type = "FIRESTORE_NATIVE"
 }
 
 module "budget-alert-function" {
