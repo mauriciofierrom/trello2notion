@@ -40,7 +40,7 @@ module.exports = (req, res) => {
         }
 
         try {
-          await db.collection('notion_tokens').doc(email).set(data);
+          await db.collection('t2n-notion-tokens').doc(email).set(data);
         } catch (e) {
           res.status(500).send(`Failed storing notion token: ${e}`);
         }
