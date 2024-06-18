@@ -1,14 +1,12 @@
 const functions = require("@google-cloud/functions-framework");
 
 const rateLimit = require("./middlewares/rate-limit");
-// const auth = require("./middlewares/auth");
+const auth = require("./middlewares/auth");
 const fileUpload = require("./middlewares/file-upload");
 const runMiddlewares = require("./util/middleware-runner");
 
 functions.http("rate-limiter", async (req, res) => {
-  // TODO: Enable the auth middleware when we actually write the frontend form
-  // const middlewares = [rateLimit, auth, fileUpload];
-  const middlewares = [rateLimit, fileUpload];
+  const middlewares = [rateLimit, auth, fileUpload];
 
   try {
     await runMiddlewares(middlewares, req, res);
