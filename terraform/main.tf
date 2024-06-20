@@ -94,10 +94,14 @@ module "rate-limit-function" {
   source = "./modules/rate-limiter"
 
   source_bucket = google_storage_bucket.source-bucket.name
+  trigger_bucket = google_storage_bucket.trigger-bucket.name
   account_email = google_service_account.account.email
   redis_url = var.redis_url
   redis_token = var.redis_token
-  trigger_bucket = google_storage_bucket.trigger-bucket.name
+  notion_oauth_client_id = var.notion_oauth_client_id
+  notion_oauth_client_secret = var.notion_oauth_client_secret
+  notion_oauth_redirect_uri = var.notion_oauth_redirect_uri
+  authgear_app_url = var.authgear_app_url
 }
 
 module "conversor-function" {
