@@ -52,6 +52,10 @@ resource "google_cloudfunctions2_function" "rate-limiter" {
       GOOGLE_CLOUD_PROJECT = "trello2notion"
       UPSTASH_REDIS_REST_URL = var.redis_url
       UPSTASH_REDIS_REST_TOKEN = var.redis_token
+      OAUTH_CLIENT_ID = var.notion_oauth_client_id
+      OAUTH_CLIENT_SECRET = var.notion_oauth_client_secret
+      OAUTH_REDIRECT_URI = var.notion_oauth_redirect_uri
+      APP_URL = var.authgear_app_url
     }
   }
 }
