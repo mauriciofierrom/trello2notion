@@ -3,7 +3,7 @@ const node_jwt = require("jsonwebtoken");
 const jwksClient = require("jwks-rsa");
 
 module.exports = async (req, res) => {
-  const appUrl = process.env("APP_URL");
+  const appUrl = process.env.APP_URL;
   const requestHeader = req.headers;
   if (requestHeader.authorization == undefined) {
     res.send("Invalid header");

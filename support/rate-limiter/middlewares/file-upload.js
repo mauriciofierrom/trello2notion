@@ -4,7 +4,6 @@ const path = require("path");
 const os = require("os");
 const uploadToGcs = require("../services/gcs-upload");
 const publish = require("../services/publish");
-const Firestore = require('@google-cloud/firestore');
 
 module.exports = (req, res) => {
   // We're getting the form data with the file to convert
