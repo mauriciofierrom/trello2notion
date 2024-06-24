@@ -36,7 +36,8 @@ module.exports = (req, res) => {
         const data = {
           email: email,
           workspaceName: responseData.workspace_name,
-          workspaceId: responseData.workspace_id
+          workspaceId: responseData.workspace_id,
+          accessToken: responseData.access_token.
         }
 
         try {
