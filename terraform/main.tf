@@ -76,7 +76,7 @@ resource "google_pubsub_topic" "file-ready-topic" {
 
 resource "google_firestore_database" "notion-tokens" {
   project = "trello2notion"
-  name = "t2n-notion-tokens"
+  name = "t2n-notion-token"
   location_id = "us-central1"
   type = "FIRESTORE_NATIVE"
 }
