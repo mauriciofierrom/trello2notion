@@ -1,6 +1,6 @@
 const Firestore = require('@google-cloud/firestore');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
   // We're getting the Notion code to exchange for the token
   if(req.method === "POST" && req.contentType === "application/json") {
     const { notionCode, email } = JSON.parse(req.body);
@@ -30,6 +30,7 @@ module.exports = (req, res) => {
           projectId: 'trello2notion',
           keyFilename: '/path/to/keyfile.json', // WTF is the keyfile
         });
+
         const responseData = await response.json();
 
         // Save to Firestore
@@ -37,8 +38,8 @@ module.exports = (req, res) => {
           email: email,
           workspaceName: responseData.workspace_name,
           workspaceId: responseData.workspace_id,
-          accessToken: responseData.access_token.
-        }
+          accessToken: responseData.access_token
+        };
 
         try {
           await db.collection('t2n-notion-token').doc(email).set(data);
