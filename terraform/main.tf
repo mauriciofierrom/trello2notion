@@ -74,11 +74,10 @@ resource "google_pubsub_topic" "file-ready-topic" {
   name = "t2n-file-ready"
 }
 
-resource "google_firestore_database" "notion-tokens" {
+resource "google_project_iam_member" "firestore" {
   project = "trello2notion"
-  name = "t2n-notion-token"
-  location_id = "us-central1"
-  type = "FIRESTORE_NATIVE"
+  role = "roles/datastore.user"
+  member  = "serviceAccount:${google_service_account.account.email}"
 }
 
 module "budget-alert-function" {
