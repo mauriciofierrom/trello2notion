@@ -30,6 +30,8 @@ gem "rubyzip", "~> 2.3.2"
 
 gem "google-cloud-storage", "~> 1.51"
 
+gem "google-cloud-firestore", "~> 2.15", ">= 2.15.1"
+
 gem "sendgrid-ruby", "~> 6.7"
 
 gem "functions_framework", "~> 1.4", ">= 1.4.1"
