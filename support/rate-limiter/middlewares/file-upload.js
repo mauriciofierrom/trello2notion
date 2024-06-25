@@ -60,8 +60,6 @@ module.exports = (req, res) => {
     });
 
     bb.end(req.rawBody);
-  } else {
-    res.status(400).send("Not a POST request");
   }
 };
 
