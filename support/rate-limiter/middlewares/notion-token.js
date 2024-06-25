@@ -2,8 +2,8 @@ const Firestore = require('@google-cloud/firestore');
 
 module.exports = async (req, res) => {
   // We're getting the Notion code to exchange for the token
-  if(req.method === "POST" && req.contentType === "application/json") {
-    const { notionCode, email } = JSON.parse(req.body);
+  if(req.method === "POST" && req.get("Content-Type") === "application/json") {
+    const { notionCode, email } = req.body;
     const clientId = process.env.OAUTH_CLIENT_ID;
     const clientSecret = process.env.OAUTH_CLIENT_SECRET;
     const redirectUri = process.env.OAUTH_REDIRECT_URI;
@@ -22,20 +22,19 @@ module.exports = async (req, res) => {
         body: JSON.stringify({
           grant_type: "authorization_code",
           code: notionCode,
+          redirect_uri: redirectUri
         })
       });
 
       if(response.ok) {
         const db = new Firestore({
-          projectId: 'trello2notion',
-          keyFilename: '/path/to/keyfile.json', // WTF is the keyfile
+          projectId: 'trello2notion'
         });
 
         const responseData = await response.json();
 
         // Save to Firestore
         const data = {
-          email: email,
           workspaceName: responseData.workspace_name,
           workspaceId: responseData.workspace_id,
           accessToken: responseData.access_token
@@ -43,12 +42,12 @@ module.exports = async (req, res) => {
 
         try {
           await db.collection('t2n-notion-token').doc(email).set(data);
+
+          // Return integration information for local client storage
+          res.send({workspaceName: data.workspaceName});
         } catch (e) {
           res.status(500).send(`Failed storing notion token: ${e}`);
         }
-
-        // Return integration information for local client storage
-        res.send({workspaceName: data.workspaceName});
       } else {
         const { error } = await response.json();
         res.status(response.code).send(`Notion error: ${error}`);
